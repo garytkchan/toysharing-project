@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-2">
+    <img src="" class="img-fluid" />
+  </div>
+    <div class="col-10">
+      <a href="{{ toy.url }}"><h1>{{ toy.title }}</h1></a>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-7">
+    <img src="{{ toy.picture.url }}" class="img-fluid" />
+  </div>
+    <div class="col-4">
+    <a href="javascript:{document.getElementById('upvote').submit()}"><button class="btn btn-primary btn-md btn-block"><i class="fas fa-thumbs-up"></i> {{ toy.votes_total }} Upvote</button></a>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-4 pt-1">
+     <p>Posted by <a href="">{{ toy.owner.first_name }}</a></p>
+  </div>
+    <div class="col-4 text-right pt-1">
+    <p><i class="fas fa-clock"></i> {{ toy.pub_date_pretty }}</p>
+    </div>
+</div>
+
+<div class="row">
+  <div class="col-8">
+    <p>{{ toy.description }}</p>
+  </div>
+</div>
+
+<form id="upvote" method="POST" action="{% url 'upvote' toy.id %}">
+  {% csrf_token %}
+  <input type="hidden">
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="album py-5 bg-light">
+   <div class="container-fluid">
+     <div class="row">
+{% for toy in toys.all %}
+
+       <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            <a href="#" id="bottle" onclick="window.location='{% url 'detail' toy.id %}';" style="cursor: pointer;" >
+           <img src="{{ toy.picture.url }}" width="100%" height="225" preserveAspectRatio="xMidYMid slice"/>
+           </a>
+           <div class="card-body">
+             <b>{{ toy.title }}</b>
+                <br><br>
+             <font color="grey" face="font_family">Brand: {{ toy.make_name }}<p class="float-right"><i class="fas fa-grin-hearts"></i>  {{ toy.votes_total }}</p></font>
+              <div class="col-4 text-right">
+            </div>
+
+             <small class="text-muted"><em>{{ toy.summary }}</em></small>
+             <br /><br />
+             <div class="d-flex justify-content-between align-items-center">
+               <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary">like</button>
+               </div>
+               <small class="text-muted">9 mins</small>
+             </div>
+           </div>
+         </div>
+       </div>
+
+
+
+{% endfor %}
+
+{% endblock %}
