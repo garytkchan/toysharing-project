@@ -10,36 +10,28 @@
 
 {% endif %}
 <br />
-<h4><i class="fas fa-keyboard"></i>  Write a new toy review</h4>
+<h4><i class="fas fa-keyboard"></i>  Post your cool shot here</h4>
 <br />
 <form method="POST" action="{% url 'create' %}" enctype="multipart/form-data">
 {% csrf_token %}
 Title:
 <br />
-<input type="text" name="title" />
-<br />
+<input type="text" name="title"  style="width: 250px;"/>
+<br /><br />
 Make:
 <br />
-<select name="make_name">
+<select name="makeName">
   <option value="Mezco">Mezco</option>
   <option value="Mafex">Mafex</option>
   <option value="S.H. Figuarts">S.H. Figuarts</option>
   <option value="Kaiyodo">Kaiyodo</option>
   <option value="Others">Others</option>
 </select>
+<br /><br />
+Description of your shot:
 <br />
-Comic:
-<br />
-<input type="text" name="comic_name" />
-<br />
-Review description:
-<br />
-<input type="textbox" name="description" />
-<br />
-Rating:
-<br />
-<input type="number" name="rating" min="0" max="10" />
-<br />
+<input type="textbox" name="description" style="width: 300px; height: 200px;" />
+<br /><br />
 Picture:
 <br />
 <input type="file" name="picture" />

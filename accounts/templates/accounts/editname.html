@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+
+{{ error }}
+
+<br />
+
+{% endif %}
+<div class="album py-3 bg-light">
+<div class="container-fluid">
+<h5>Edit your name</h5>
+<br />
+<form method="POST" action="{% url 'profile' %}">
+{% csrf_token %}
+Your new name:
+<br />
+<input type="text" name="editname" />
+<br />
+</div>
+</div>
+{% endblock %}

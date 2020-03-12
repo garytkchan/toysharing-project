@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 # requires user login before creating products
 from django.contrib.auth.decorators import login_required
-from .models import Toys, Make, Comic
+from .models import Toys, Make
 from django.utils import timezone
+from django.db.models import Q # new
 
 def home(request):
     toys = Toys.objects
@@ -11,25 +12,22 @@ def home(request):
 @login_required(login_url="/accounts/signup")
 def create(request):
      if request.method == 'POST':
-        if request.POST['title'] and request.POST['make_name'] and request.POST['comic_name'] and request.POST['description'] and request.POST['rating'] and request.FILES['picture']:
+        if request.POST['title'] and request.POST['makeName'] and request.POST['description'] and request.FILES['picture']:
             # instantiate Toys() object
             toy = Toys()
             toy.title = request.POST['title']
             # drop down list in create.html to choose between Makes
-            if request.POST['make_name'] == 'Mezco':
-                toy.make_name = Make.objects.get(make_name="Mezco")
-            elif request.POST['make_name'] == 'Mafex':
-                toy.make_name = Make.objects.get(make_name="Mafex")
-            elif request.POST['make_name'] == 'Kaiyodo':
-                toy.make_name = Make.objects.get(make_name="Kaiyodo")
-            elif request.POST['make_name'] == 'S.H. Figuarts':
-                toy.make_name = Make.objects.get(make_name="S.H. Figuarts")
+            if request.POST['makeName'] == 'Mezco':
+                toy.makeName = Make.objects.get(makeName="Mezco")
+            elif request.POST['makeName'] == 'Mafex':
+                toy.makeName = Make.objects.get(makeName="Mafex")
+            elif request.POST['makeName'] == 'Kaiyodo':
+                toy.makeName = Make.objects.get(makeName="Kaiyodo")
+            elif request.POST['makeName'] == 'S.H. Figuarts':
+                toy.makeName = Make.objects.get(makeName="S.H. Figuarts")
             else:
-                toy.make_name = Make.objects.get(make_name="Others")
-
-            toy.comic_name = Comic.objects.get(comic_name="Marvel")
+                toy.makeName = Make.objects.get(makeName="Others")
             toy.description = request.POST['description']
-            toy.rating = request.POST['rating']
             toy.picture = request.FILES['picture']
             toy.post_date = timezone.datetime.now()
             toy.owner_id = request.user.id
@@ -51,3 +49,21 @@ def upvote(request, toy_id):
         toy.votes_total += 1
         toy.save()
         return redirect('/toys/' + str(toy.id))
+
+def search_toy(request):
+    query = request.GET.get('search_toy')
+    toys = Toys.objects.filter(Q(title__icontains=query) | Q(description__icontains=query) | Q(post_date__icontains=query) | Q(makeName__makeName__icontains=query))
+    return render(request, 'toys/home.html', {'toys': toys})
+
+
+@login_required(login_url="/accounts/signup")
+def my_toy(request):
+    user = request.user
+    ownerID = user.id
+    toys = Toys.objects.filter(owner__id=ownerID)
+    return render(request, 'toys/home.html', {'toys': toys})
+
+@login_required(login_url="/accounts/signup")
+def searchUserToy(request, userID):
+    toys = Toys.objects.get(owner__id=userID)
+    return render(request, 'toys/home.html', {'toys': toys})

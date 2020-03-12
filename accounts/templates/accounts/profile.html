@@ -1,1 +1,40 @@
-This is profile
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if error %}
+
+{{ error }}
+
+<br />
+
+{% endif %}
+
+<br />
+<div class="album py-3 bg-light">
+<div class="container-fluid">
+<h5>ACCOUNT</h5>
+<br />
+Your name:   <em>{{ user.first_name }}</em>
+<br />
+Username:    <em>{{ user.username }}</em>
+<br />
+Last login:   <em>{{ user.last_login }}</em>
+<br />
+Member since:   <em>{{ user.date_joined }}</em>
+<br /><br />
+<button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='{% url 'my_toy' %}';">My post</button>
+<button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location='{% url 'change_password' %}';">Chanage password</button>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

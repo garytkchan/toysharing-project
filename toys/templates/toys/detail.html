@@ -3,35 +3,34 @@
 {% block content %}
 
 <div class="row">
-  <div class="col-2">
+  <div class="col-3">
     <img src="" class="img-fluid" />
   </div>
-    <div class="col-10">
-      <a href="{{ toy.url }}"><h1>{{ toy.title }}</h1></a>
-    </div>
+  <h3>{{ toy.title }}</h3>
 </div>
 
 <div class="row">
   <div class="col-7">
+    <p align="left"><em>Posted by </em><a href="{% url 'searchUserToy' toy.owner.id %}" >{{ toy.owner.first_name }}</a></p>
     <img src="{{ toy.picture.url }}" class="img-fluid" />
   </div>
     <div class="col-4">
-    <a href="javascript:{document.getElementById('upvote').submit()}"><button class="btn btn-primary btn-md btn-block"><i class="fas fa-thumbs-up"></i> {{ toy.votes_total }} Upvote</button></a>
+
     </div>
 </div>
 
 <div class="row">
-  <div class="col-4 pt-1">
-     <p>Posted by <a href="">{{ toy.owner.first_name }}</a></p>
+  <div class="col-4 pt-2">
+     <a href="javascript:{document.getElementById('upvote').submit()}"><button class="btn btn-primary btn-sm btn-block" style="height:26px;width:85px;">{{ toy.votes_total }} <i class="fas fa-grin-hearts"></i> COOL</button></a>
   </div>
-    <div class="col-4 text-right pt-1">
+    <div class="col-3 text-right pt-2">
     <p><i class="fas fa-clock"></i> {{ toy.pub_date_pretty }}</p>
     </div>
 </div>
 
 <div class="row">
   <div class="col-8">
-    <p>{{ toy.description }}</p>
+    <p><em>{{ toy.description }}</em></p>
   </div>
 </div>
 
