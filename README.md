@@ -9,10 +9,10 @@ This project is written in Python with Django 2.2 and back up by the MySql datab
 
 In the project directory, you can run:
 
-### `npm start`
-### 'python manage.py runserver'
+### `python manage.py runserver`
+
 
 Runs the app in the development mode.<br>
 Open [localhost:8000](localhost:8000) to view it in the browser.
 
-Note: It is important to run with the correct database schema or otherwise it would not work.
+Note: It is important to run with the correct database schema or otherwise it would not work. Please reference from the schema file.
