@@ -65,14 +65,22 @@ WSGI_APPLICATION = 'toysharing.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# for MySql
+# 'ENGINE': 'django.db.backends.mysql',
+# 'NAME': 'toys_review',
+# 'USER': 'root',
+# 'PASSWORD': 'ROOT',
+# 'HOST': 'localhost',
+# 'PORT': '3306',
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'toys_review',
         'USER': 'root',
         'PASSWORD': 'ROOT',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT' : '5432',
     }
 }
 
